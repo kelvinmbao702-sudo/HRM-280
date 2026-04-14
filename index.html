@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRM L99 — OODA Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --paper: #f5f0e8;
+    --gold: #d4a017;
+    --rust: #c0392b;
+    --teal: #0e7c7b;
+    --slate: #1c3144;
+    --cream: #faf6ee;
+    --muted: #6b6458;
+    --obs: #0e7c7b;
+    --ori: #7b3f00;
+    --dec: #1c3144;
+    --act: #8b1a1a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--slate);
+    color: var(--paper);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'OODA';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22vw;
+    color: rgba(255,255,255,0.03);
+    position: absolute;
+    top: -30px; right: -20px;
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: #fff;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    margin-top: 14px;
+    font-size: 15px;
+    color: rgba(245,240,232,0.7);
+    max-width: 520px;
+    font-weight: 300;
+  }
+  .ooda-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .ooda-pill {
+    padding: 6px 18px;
+    border-radius: 2px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    letter-spacing: 0.1em;
+  }
+  .pill-o1 { background: var(--obs); color: #fff; }
+  .pill-o2 { background: var(--ori); color: #fff; }
+  .pill-d { background: var(--dec); color: #fff; }
+  .pill-a { background: var(--act); color: #fff; }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 28px; }
+
+  /* ── SECTION HEADERS ── */
+  .section-block {
+    margin: 48px 0 0;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    padding: 4px 10px;
+    border-radius: 1px;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .tag-obs { background: var(--obs); }
+  .tag-ori { background: var(--ori); }
+  .tag-dec { background: var(--dec); }
+  .tag-act { background: var(--act); }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: #fff;
+    border: 1.5px solid rgba(10,10,15,0.1);
+    padding: 20px;
+    border-radius: 3px;
+    position: relative;
+  }
+  .card-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    color: rgba(10,10,15,0.07);
+    position: absolute;
+    top: 8px; right: 14px;
+    line-height: 1;
+  }
+  .card h3 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+  .card p { font-size: 13.5px; color: #333; }
+
+  /* ── HRM TREE ── */
+  .hrm-tree {
+    background: var(--slate);
+    color: #fff;
+    padding: 28px;
+    border-radius: 3px;
+    margin-bottom: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 2;
+  }
+  .tree-root { color: var(--gold); font-size: 15px; font-weight: 700; }
+  .tree-branch { color: rgba(245,240,232,0.55); }
+  .tree-leaf { color: #fff; }
+  .tree-leaf em { color: #a8d8d8; font-style: normal; }
+
+  /* ── ADVANTAGE BOX ── */
+  .advantage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .adv-item {
+    background: var(--cream);
+    border-left: 4px solid var(--obs);
+    padding: 14px 16px;
+    border-radius: 2px;
+  }
+  .adv-item strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--obs); }
+  .adv-item span { font-size: 13px; color: #444; }
+
+  /* ── TREND TABLE ── */
+  .trend-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    font-size: 13.5px;
+  }
+  .trend-table th {
+    background: var(--ori);
+    color: #fff;
+    text-align: left;
+    padding: 10px 14px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+  }
+  .trend-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(10,10,15,0.08);
+    vertical-align: top;
+  }
+  .trend-table tr:nth-child(even) td { background: rgba(123,63,0,0.04); }
+  .trend-table td:first-child { font-weight: 600; color: var(--ori); width: 28%; }
+
+  /* ── LAW CARDS ── */
+  .law-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .law-card {
+    background: #fff;
+    border-top: 4px solid var(--ori);
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .law-card .law-title { font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ori); margin-bottom: 6px; }
+  .law-card p { font-size: 13px; color: #444; }
+
+  .defense-box {
+    background: #fff8ef;
+    border: 1.5px solid #d4a017;
+    padding: 18px 20px;
+    border-radius: 3px;
+    margin-bottom: 24px;
+  }
+  .defense-box h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.08em; color: var(--ori); margin-bottom: 10px; }
+  .defense-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+  .def-badge { background: var(--gold); color: #fff; font-size: 10px; font-family: 'JetBrains Mono', monospace; padding: 2px 7px; border-radius: 1px; white-space: nowrap; flex-shrink: 0; }
+  .def-text { font-size: 13px; }
+
+  /* ── FLOW ── */
+  .flow-wrapper { margin-bottom: 24px; overflow-x: auto; }
+  .flow { display: flex; align-items: stretch; gap: 0; }
+  .flow-step {
+    background: var(--dec);
+    color: #fff;
+    padding: 18px 16px;
+    flex: 1;
+    min-width: 120px;
+    position: relative;
+    text-align: center;
+  }
+  .flow-step::after {
+    content: '';
+    position: absolute;
+    right: -14px; top: 50%;
+    transform: translateY(-50%);
+    width: 0; height: 0;
+    border-top: 24px solid transparent;
+    border-bottom: 24px solid transparent;
+    border-left: 14px solid var(--dec);
+    z-index: 2;
+  }
+  .flow-step:last-child::after { display: none; }
+  .flow-step .step-n { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .flow-step .step-title { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.06em; line-height: 1.2; }
+  .flow-step .step-sub { font-size: 10.5px; color: rgba(255,255,255,0.65); margin-top: 4px; }
+
+  .formula-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .formula {
+    background: var(--ink);
+    color: var(--gold);
+    padding: 14px 20px;
+    border-radius: 2px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    flex: 1;
+    min-width: 200px;
+  }
+  .formula em { display: block; color: rgba(245,240,232,0.55); font-style: normal; font-size: 11px; margin-top: 4px; }
+
+  /* ── JOB ANALYSIS ── */
+  .ja-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .ja-box {
+    background: #fff;
+    padding: 18px;
+    border-top: 4px solid var(--act);
+  }
+  .ja-box h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.06em; color: var(--act); margin-bottom: 8px; }
+  .ja-box ul { padding-left: 16px; font-size: 13px; color: #444; }
+  .ja-box li { margin-bottom: 4px; }
+
+  .methods-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .method-item {
+    background: #fff;
+    border: 1.5px solid rgba(10,10,15,0.1);
+    padding: 14px;
+    text-align: center;
+    border-radius: 2px;
+  }
+  .method-item .method-n { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--act); line-height: 1; }
+  .method-item .method-name { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+
+  /* ── COMPENSATION ── */
+  .comp-tree {
+    background: #fff;
+    border: 2px solid var(--act);
+    padding: 20px;
+    margin-bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  /* ── EQUITY BOX ── */
+  .equity-box {
+    background: #fff5f5;
+    border-left: 4px solid var(--rust);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 13px;
+  }
+  .equity-box strong { color: var(--rust); }
+
+  /* ── UNIONS ── */
+  .union-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .union-card {
+    background: #fff;
+    padding: 18px;
+    border-top: 4px solid var(--act);
+  }
+  .union-card h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.06em; color: var(--act); margin-bottom: 10px; }
+  .union-card ol { padding-left: 18px; font-size: 13px; color: #444; }
+  .union-card li { margin-bottom: 5px; }
+
+  /* ── CB FLOW ── */
+  .cb-flow { display: flex; gap: 0; margin-bottom: 24px; flex-wrap: wrap; }
+  .cb-step {
+    background: var(--act);
+    color: #fff;
+    padding: 12px 18px;
+    flex: 1;
+    min-width: 90px;
+    text-align: center;
+    position: relative;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+  }
+  .cb-step::after {
+    content: '→';
+    position: absolute;
+    right: -10px; top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    color: var(--act);
+    font-size: 1.2rem;
+  }
+  .cb-step:last-child::after { display: none; }
+
+  /* ── HPWS ── */
+  .hpws-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .hpws-item {
+    background: #fff;
+    border-bottom: 3px solid var(--act);
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .hpws-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .hpws-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--act); }
+  .hpws-desc { font-size: 11.5px; color: #555; margin-top: 4px; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--obs), var(--ori), var(--dec), var(--act));
+    margin: 60px 0 0;
+  }
+
+  /* ── QA SECTION ── */
+  .qa-hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .qa-hero::before {
+    content: 'Q&A';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20vw;
+    color: rgba(255,255,255,0.03);
+    position: absolute;
+    top: -10px; right: -10px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .qa-hero .hero-label { color: var(--rust); }
+  .qa-hero h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 6vw, 4rem); letter-spacing: 0.04em; color: #fff; }
+  .qa-hero p { color: rgba(245,240,232,0.6); font-size: 14px; margin-top: 8px; font-weight: 300; }
+
+  .qa-block {
+    background: #fff;
+    border-left: 5px solid var(--dec);
+    margin: 20px 0;
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .qa-question {
+    background: var(--dec);
+    color: #fff;
+    padding: 16px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .q-badge {
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .qa-question p { font-size: 14px; font-weight: 600; line-height: 1.5; }
+  .qa-answer { padding: 20px 22px; }
+  .qa-answer h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .answer-list { list-style: none; padding: 0; }
+  .answer-list li {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    align-items: flex-start;
+  }
+  .ans-num {
+    background: var(--dec);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    min-width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .ans-content strong { color: var(--ink); }
+  .ans-example {
+    display: inline-block;
+    background: #f0f7ff;
+    border-left: 3px solid #4a90d9;
+    padding: 4px 10px;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #336;
+    font-style: italic;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .qa-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .qa-table th {
+    background: var(--slate);
+    color: #fff;
+    padding: 9px 14px;
+    text-align: left;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.07em;
+  }
+  .qa-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    vertical-align: top;
+  }
+  .qa-table tr:nth-child(even) td { background: rgba(28,49,68,0.04); }
+  .qa-table td:first-child { font-weight: 600; color: var(--dec); }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--slate);
+    color: rgba(245,240,232,0.5);
+    text-align: center;
+    padding: 28px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.06em;
+    margin-top: 60px;
+  }
+  .footer span { color: var(--gold); }
+
+  /* ── PRINT ── */
+  @media print {
+    .hero::before, .qa-hero::before { display: none; }
+    body { font-size: 12px; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section-block { animation: fadeUp 0.4s ease both; }
+  .section-block:nth-child(2) { animation-delay: 0.05s; }
+  .section-block:nth-child(3) { animation-delay: 0.1s; }
+  .section-block:nth-child(4) { animation-delay: 0.15s; }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-label">// Human Resource Management · L99 · OODA Framework</div>
+    <h1>HRM <span>Study</span><br>Guide</h1>
+    <p class="hero-sub">Observe → Orient → Decide → Act. Every concept broken down into the core loop you need to master.</p>
+    <div class="ooda-pills">
+      <div class="ooda-pill pill-o1">① OBSERVE — What is HRM?</div>
+      <div class="ooda-pill pill-o2">② ORIENT — Environment & Laws</div>
+      <div class="ooda-pill pill-d">③ DECIDE — HR Planning</div>
+      <div class="ooda-pill pill-a">④ ACT — Executing HR</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ════════════════════ OBSERVE ════════════════════ -->
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-tag tag-obs">OBSERVE</span>
+    <span class="section-title">What is HRM?</span>
+  </div>
+
+  <div class="hrm-tree">
+    <div class="tree-root">[ HRM = Strategic Process ]</div>
+    <div>
+      <span class="tree-branch">├── </span><span class="tree-leaf"><em>ACQUIRE</em> → Staffing the right people</span><br>
+      <span class="tree-branch">├── </span><span class="tree-leaf"><em>TRAIN</em> → Development & learning</span><br>
+      <span class="tree-branch">├── </span><span class="tree-leaf"><em>APPRAISE</em> → Performance management</span><br>
+      <span class="tree-branch">├── </span><span class="tree-leaf"><em>COMPENSATE</em> → Rewards & pay</span><br>
+      <span class="tree-branch">└── </span><span class="tree-leaf"><em>PROTECT</em> → Safety & labour relations</span>
+    </div>
+  </div>
+
+  <div style="margin-bottom:14px; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.1em; color:var(--obs);">▸ CORE DEFINITION</div>
+  <div style="background:#fff; border-left:5px solid var(--obs); padding:16px 20px; font-size:15px; margin-bottom:20px;">
+    Getting the <strong>right people</strong>, with the <strong>right skills</strong>, in the <strong>right place</strong>, at the <strong>right time</strong>.
+  </div>
+
+  <div style="margin-bottom:14px; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.1em; color:var(--obs);">▸ WHY PEOPLE ARE A COMPETITIVE ADVANTAGE</div>
+  <div class="advantage-grid">
+    <div class="adv-item"><strong>Valuable</strong><span>Perform critical, irreplaceable functions for the business</span></div>
+    <div class="adv-item"><strong>Rare</strong><span>High-level skills and talent are genuinely uncommon in the market</span></div>
+    <div class="adv-item"><strong>Cannot Be Imitated</strong><span>Unique organisational culture cannot be copied by competitors</span></div>
+    <div class="adv-item"><strong>No Substitutes</strong><span>Robots & automation cannot replace human commitment & creativity</span></div>
+  </div>
+</div>
+
+<!-- ════════════════════ ORIENT ════════════════════ -->
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-tag tag-ori">ORIENT</span>
+    <span class="section-title">Environment & Laws</span>
+  </div>
+
+  <div style="margin-bottom:14px; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.1em; color:var(--ori);">▸ 5 FORCES SHAPING HRM (Unit 2)</div>
+  <table class="trend-table">
+    <thead>
+      <tr><th>Trend / Force</th><th>How It Shapes HR</th><th>Quick Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Globalization</td><td>HR must recruit employees with cultural adaptability for global roles</td><td>Zambian bank opening in DRC needs French-speaking staff</td></tr>
+      <tr><td>Workforce Diversity</td><td>Shift from "treating everyone alike" to recognising individual differences</td><td>Flexible arrangements for different family needs</td></tr>
+      <tr><td>Technology</td><td>HRIS systems; online recruiting; web-based training platforms</td><td>LinkedIn recruitment vs. newspaper ads</td></tr>
+      <tr><td>Demographics</td><td>External labour market affects internal hiring options</td><td>Zambia's youthful population → focus on graduates</td></tr>
+      <tr><td>Economic Trends</td><td>Inflation/recession → "rightsizing" (layoffs or hiring freezes)</td><td>COVID-19 furloughs due to budget cuts</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-bottom:14px; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.1em; color:var(--ori);">▸ ZAMBIAN EEO LAWS (Unit 3) — Pamela's Pregnancy Case</div>
+  <div class="law-cards">
+    <div class="law-card">
+      <div class="law-title">Constitution of Zambia — Art. 23</div>
+      <p>The supreme law. Defines "discrimination" as different treatment based on race, tribe, sex, place of origin, political opinions, or creed.</p>
+    </div>
+    <div class="law-card">
+      <div class="law-title">Employment Code Act No. 3 of 2019 — §5</div>
+      <p>Obliges employers to promote equal opportunity and eliminate discrimination in recruitment, training, promotion, and termination.</p>
+    </div>
+    <div class="law-card">
+      <div class="law-title">Industrial & Labour Relations Act — Ch. 269</div>
+      <p>Lists prohibited discrimination grounds: colour, nationality, pregnancy, marital status, disability, and social origin.</p>
+    </div>
+  </div>
+
+  <div class="defense-box">
+    <h4>⚖ Defenses an Employer Can Use</h4>
+    <div class="defense-row"><span class="def-badge">BFOQ</span><span class="def-text"><strong>Bona Fide Occupational Qualification</strong> — e.g., hiring only female staff for a women's undergarment fitting store.</span></div>
+    <div class="defense-row"><span class="def-badge">NECESSITY</span><span class="def-text"><strong>Business Necessity</strong> — e.g., requiring an engineering degree for a structural engineering post.</span></div>
+    <div class="defense-row"><span class="def-badge">CITIZEN</span><span class="def-text"><strong>Zambian National Only</strong> — Certain reserved jobs are constitutionally limited to citizens.</span></div>
+  </div>
+</div>
+
+<!-- ════════════════════ DECIDE ════════════════════ -->
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-tag tag-dec">DECIDE</span>
+    <span class="section-title">The HR Planning Process</span>
+  </div>
+
+  <div style="margin-bottom:14px; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.1em; color:var(--dec);">▸ 5-STEP HR PLANNING PROCESS (Unit 4)</div>
+  <div class="flow-wrapper">
+    <div class="flow">
+      <div class="flow-step"><div class="step-n">STEP 1</div><div class="step-title">Analyse Org Plans</div><div class="step-sub">Company objectives & strategy</div></div>
+      <div class="flow-step"><div class="step-n">STEP 2</div><div class="step-title">Assess Current HR</div><div class="step-sub">HRIS inventory: skills, edu, ratings</div></div>
+      <div class="flow-step"><div class="step-n">STEP 3</div><div class="step-title">Forecast Demand</div><div class="step-sub">Turnover, tech, budgets, growth</div></div>
+      <div class="flow-step"><div class="step-n">STEP 4</div><div class="step-title">Forecast Supply</div><div class="step-sub">Internal promotions vs. external market</div></div>
+      <div class="flow-step"><div class="step-n">STEP 5</div><div class="step-title">Match D & S</div><div class="step-sub">Shortage → Hire. Surplus → Layoff.</div></div>
+    </div>
+  </div>
+
+  <div class="formula-row">
+    <div class="formula">SHORTAGE: Demand &gt; Supply → Hire / Transfer<em>Recruitment phase begins immediately</em></div>
+    <div class="formula">OVERSUPPLY: Demand &lt; Supply → Layoffs / Attrition<em>Rightsizing; survivor guilt risk</em></div>
+  </div>
+
+  <div style="background:#fff5f5; border-left:4px solid var(--rust); padding:14px 18px; font-size:13px; margin-bottom:8px;">
+    ⚠ <strong>Downsizing Warning:</strong> Leads to <em>survivor guilt</em>, low morale, and increased workload for remaining staff. Handle with care.
+  </div>
+</div>
+
+<!-- ════════════════════ ACT ════════════════════ -->
+<div class="section-block">
+  <div class="section-header">
+    <span class="section-tag tag-act">ACT</span>
+    <span class="section-title">Executing HR Functions</span>
+  </div>
+
+  <!-- Job Analysis -->
+  <div style="margin-bottom:14px; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.1em; color:var(--act);">▸ A. JOB ANALYSIS — The Foundation</div>
+  <div class="ja-split">
+    <div class="ja-box">
+      <h4>Job Description</h4>
+      <p style="font-size:12px; color:#777; margin-bottom:8px; font-style:italic;">What the job DOES</p>
+      <ul>
+        <li>Duties & responsibilities</li>
+        <li>Tasks performed daily</li>
+        <li>Working conditions</li>
+        <li>Reporting relationships</li>
+      </ul>
+    </div>
+    <div class="ja-box">
+      <h4>Job Specification</h4>
+      <p style="font-size:12px; color:#777; margin-bottom:8px; font-style:italic;">Who fills the job (KSAOs)</p>
+      <ul>
+        <li><strong>K</strong>nowledge required</li>
+        <li><strong>S</strong>kills needed</li>
+        <li><strong>A</strong>bilities expected</li>
+        <li><strong>O</strong>ther traits (personality, etc.)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-bottom:12px; font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--act);">6 Methods to Collect Job Data:</div>
+  <div class="methods-grid">
+    <div class="method-item"><div class="method-n">1</div><div class="method-name">Observation</div></div>
+    <div class="method-item"><div class="method-n">2</div><div class="method-name">Individual Interview</div></div>
+    <div class="method-item"><div class="method-n">3</div><div class="method-name">Group Interview</div></div>
+    <div class="method-item"><div class="method-n">4</div><div class="method-name">Structured Questionnaire</div></div>
+    <div class="method-item"><div class="method-n">5</div><div class="method-name">Technical Conference (SMEs)</div></div>
+    <div class="method-item"><div class="method-n">6</div><div class="method-name">Employee Diary</div></div>
+  </div>
+
+  <!-- Compensation -->
+  <div style="margin-bottom:14px; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.1em; color:var(--act);">▸ B. COMPENSATION & REWARDS</div>
+  <div class="comp-tree">
+    <div style="color:#c0392b; font-weight:700;">[ Total Compensation ]</div>
+    <div>
+      <span style="color:#aaa;">├── </span><span style="color:#222;"><strong>Direct Financial</strong> → Wages, Salary, Commissions, Bonuses</span><br>
+      <span style="color:#aaa;">└── </span><span style="color:#222;"><strong>Indirect Financial</strong> → Insurance, Annual Leave, NAPSA contributions</span>
+    </div>
+  </div>
+  <div class="equity-box">
+    <strong>Equity Theory</strong> — Employees constantly compare their Inputs (effort) vs. Rewards to those of co-workers.<br><br>
+    <strong>Underpaid?</strong> → Work slower, increase absenteeism, or resign.<br>
+    <strong>Types:</strong> <em>Individual Equity</em> (vs. co-workers) + <em>Procedural Equity</em> (fairness of the process itself).
+  </div>
+
+  <!-- Unions -->
+  <div style="margin-bottom:14px; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.1em; color:var(--act);">▸ C. INDUSTRIAL RELATIONS & UNIONS</div>
+  <div class="union-grid">
+    <div class="union-card">
+      <h4>Why Employees Join Unions</h4>
+      <ol>
+        <li>Dissatisfaction with wages/benefits</li>
+        <li>Desire for better communication</li>
+        <li>Job security concerns</li>
+        <li>Sense of belonging/fellowship</li>
+        <li>Protection against exploitation</li>
+      </ol>
+    </div>
+    <div class="union-card">
+      <h4>Causes of Industrial Disputes</h4>
+      <ol>
+        <li>Industrial factors (wages, hours)</li>
+        <li>Management refuses to recognise unions</li>
+        <li>Communication breakdowns</li>
+        <li>Unreasonable standards/policies</li>
+        <li>Unrealised expectations (no promotion)</li>
+      </ol>
+    </div>
+  </div>
+
+  <div style="margin-bottom:12px; font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--act);">Collective Bargaining — 5 Steps:</div>
+  <div class="cb-flow">
+    <div class="cb-step">1. Prepare</div>
+    <div class="cb-step">2. Discuss</div>
+    <div class="cb-step">3. Propose</div>
+    <div class="cb-step">4. Bargain</div>
+    <div class="cb-step">5. Settle</div>
+  </div>
+
+  <!-- HPWS -->
+  <div style="margin-bottom:14px; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.1em; color:var(--act);">▸ D. HIGH PERFORMANCE WORK SYSTEMS (HPWS)</div>
+  <div class="hpws-grid">
+    <div class="hpws-item"><div class="hpws-icon">🏗</div><div class="hpws-label">Org Structure</div><div class="hpws-desc">Flat hierarchies; clear reporting lines</div></div>
+    <div class="hpws-item"><div class="hpws-icon">⚙️</div><div class="hpws-label">Task Design</div><div class="hpws-desc">Teams complete whole products, not just parts</div></div>
+    <div class="hpws-item"><div class="hpws-icon">👥</div><div class="hpws-label">People</div><div class="hpws-desc">Well-suited staff; peer involvement in selection</div></div>
+    <div class="hpws-item"><div class="hpws-icon">🏆</div><div class="hpws-label">Reward Systems</div><div class="hpws-desc">Pay tied to performance & company results</div></div>
+    <div class="hpws-item"><div class="hpws-icon">📡</div><div class="hpws-label">Info Systems</div><div class="hpws-desc">Real-time customer data visible company-wide</div></div>
+  </div>
+  <div style="background: linear-gradient(135deg, #8b1a1a 0%, #c0392b 100%); color:#fff; padding:14px 20px; font-size:13px; border-radius:2px; margin-bottom: 40px;">
+    <strong>HPWS Outcomes:</strong> ↑ Productivity · ↑ Quality · ↓ Turnover · ↑ Job Satisfaction · Constant Feedback Loop
+  </div>
+
+</div>
+</div><!-- end .container -->
+
+<!-- ════════════════════ DIVIDER ════════════════════ -->
+<div class="divider"></div>
+
+<!-- ════════════════════ Q&A HERO ════════════════════ -->
+<div class="qa-hero">
+  <div class="container">
+    <div class="hero-label">// Exam Preparation — Past Papers 2019 · 2021 · 2022 · Test 1</div>
+    <h2>Questions &amp; Full Answers</h2>
+    <p>Every question from your past test papers with complete, mark-ready answers sourced from lecture materials.</p>
+  </div>
+</div>
+
+<div class="container" style="padding-top:32px;">
+
+  <!-- Q1 -->
+  <div class="qa-block">
+    <div class="qa-question">
+      <span class="q-badge">Q1 · 25 Marks</span>
+      <p>Identify and discuss five (5) forces affecting HRM goals and practices.</p>
+    </div>
+    <div class="qa-answer">
+      <h4>// Answer — Unit 2: Trends in HRM</h4>
+      <ul class="answer-list">
+        <li><span class="ans-num">1</span><div class="ans-content"><strong>Globalization:</strong> Organisations are no longer constrained by borders. HR must ensure employees have cultural adaptability and are ready for global assignments.<div class="ans-example">Example: A Zambian bank opening in DRC needs HR to recruit French-speaking staff.</div></div></li>
+        <li><span class="ans-num">2</span><div class="ans-content"><strong>Workforce Diversity:</strong> The workforce is heterogeneous (gender, race, religion, disability). HR must shift from treating everyone alike to recognising individual differences and avoiding discriminatory practices.<div class="ans-example">Example: Providing flexible work arrangements for different family needs.</div></div></li>
+        <li><span class="ans-num">3</span><div class="ans-content"><strong>Technological Changes:</strong> Technology changes the nature of jobs and how HR functions (HRIS). HR must recruit tech-savvy employees and use online/web-based training.<div class="ans-example">Example: Using LinkedIn to recruit instead of newspaper ads.</div></div></li>
+        <li><span class="ans-num">4</span><div class="ans-content"><strong>Demographic Trends:</strong> Changes in the external labour market (aging population, education levels) affect the internal labour force. HR must know who is available.<div class="ans-example">Example: Zambia's youthful population means HR focuses on graduate recruitment.</div></div></li>
+        <li><span class="ans-num">5</span><div class="ans-content"><strong>Economic Trends:</strong> Inflation, recession, and unemployment impact HR decisions. In bad economies, HR does "rightsizing" (layoffs/furloughs).<div class="ans-example">Example: During COVID-19, HR had to furlough workers due to budget cuts.</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qa-block">
+    <div class="qa-question">
+      <span class="q-badge">Q2 · 15 Marks</span>
+      <p>Explain the 5 steps of the Human Resource Planning Process.</p>
+    </div>
+    <div class="qa-answer">
+      <h4>// Answer — Unit 4, Pages 11–20</h4>
+      <ul class="answer-list">
+        <li><span class="ans-num">1</span><div class="ans-content"><strong>Analysis of Organisational Plans & Objectives:</strong> HR planning starts with the company's overall strategy. If the objective is expansion, HR must initiate quick recruitment to support new operations.</div></li>
+        <li><span class="ans-num">2</span><div class="ans-content"><strong>Assessing Current Human Resources:</strong> Creating a profile of current employees using an HRIS (Human Resource Information System). The inventory includes skills, education, performance ratings, and languages spoken.</div></li>
+        <li><span class="ans-num">3</span><div class="ans-content"><strong>Determining Demand for Labour (Forecasting):</strong> Projecting future HR needs based on projected turnover, retirements, new products, technology changes, and competition in the market.</div></li>
+        <li><span class="ans-num">4</span><div class="ans-content"><strong>Forecasting Future Labour Supply:</strong> Determining where candidates will come from — <em>Internal Supply:</em> current employees via promotions/transfers. <em>External Supply:</em> labour market, universities, recruitment agencies.</div></li>
+        <li><span class="ans-num">5</span><div class="ans-content"><strong>Matching Labour Demand and Supply:</strong> Comparing forecasts to pinpoint shortages (→ hire/transfer) or overstaffing (→ layoffs/natural attrition).</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qa-block">
+    <div class="qa-question">
+      <span class="q-badge">Q3 · 15 Marks</span>
+      <p>Discuss the components of an employee health and safety programme.</p>
+    </div>
+    <div class="qa-answer">
+      <h4>// Answer — Unit 3 (Safe Workplace) & Unit 2 (Maintenance Function)</h4>
+      <ul class="answer-list">
+        <li><span class="ans-num">1</span><div class="ans-content"><strong>Safe Working Conditions:</strong> Ensuring the physical environment is free from hazards — noise, heat, dust, and dangerous equipment as outlined in the Job Description (section 6).</div></li>
+        <li><span class="ans-num">2</span><div class="ans-content"><strong>Employee Assistance Programs (EAP):</strong> Helping employees deal with personal issues (substance abuse, child care, depression) because personal problems directly affect productivity and workplace safety.</div></li>
+        <li><span class="ans-num">3</span><div class="ans-content"><strong>Safety Training:</strong> Properly training employees on how to use equipment safely and avoid careless habits that lead to accidents and injuries.</div></li>
+        <li><span class="ans-num">4</span><div class="ans-content"><strong>Health & Safety Committees:</strong> Involving employees in safety decisions, incident reporting, and continuous improvement of safety protocols.</div></li>
+        <li><span class="ans-num">5</span><div class="ans-content"><strong>Medical & Workers' Compensation:</strong> Providing medical insurance and fully complying with compensation laws for work-related injuries under the Workers' Compensation Act.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qa-block">
+    <div class="qa-question">
+      <span class="q-badge">Q4 · 10 Marks</span>
+      <p>Identify and discuss any three (3) major equal employment opportunity laws and regulations in Zambia.</p>
+    </div>
+    <div class="qa-answer">
+      <h4>// Answer — Unit 3, Pages 4–6</h4>
+      <ul class="answer-list">
+        <li><span class="ans-num">1</span><div class="ans-content"><strong>Constitution of Zambia (Article 23):</strong> The supreme law of the land. Defines "discrimination" as affording different treatment based on race, tribe, sex, place of origin, political opinions, or creed. All other laws must be consistent with it.</div></li>
+        <li><span class="ans-num">2</span><div class="ans-content"><strong>Employment Code Act No. 3 of 2019 — Section 5:</strong> Places a positive obligation on the employer to actively promote equal opportunity and eliminate discrimination in recruitment, training, promotion, and termination of employment.</div></li>
+        <li><span class="ans-num">3</span><div class="ans-content"><strong>Industrial and Labour Relations Act (Chapter 269):</strong> Lists specific prohibited grounds for discrimination including: colour, nationality, pregnancy, marital status, disability, and social origin. This is the law that would directly cover Pamela's case.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qa-block">
+    <div class="qa-question">
+      <span class="q-badge">Q5 · 10 Marks</span>
+      <p>Use practical examples to distinguish internal recruitment from external recruitment.</p>
+    </div>
+    <div class="qa-answer">
+      <h4>// Answer — Unit 4 (Supply Forecasting), Pages 18–19</h4>
+      <table class="qa-table">
+        <thead>
+          <tr><th>Feature</th><th>Internal Recruitment</th><th>External Recruitment</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Source</td><td>Current employees of the organisation</td><td>People outside the organisation</td></tr>
+          <tr><td>Method</td><td>Promoting, demoting, or transferring existing staff</td><td>Advertising on job boards, universities, recruitment agencies</td></tr>
+          <tr><td>Difficulty</td><td>Easy — management decides and effects the move</td><td>Difficult — must attract people away from current employers</td></tr>
+          <tr><td>Example</td><td>Promoting a Senior Salesperson to Sales Manager at the Lusaka branch</td><td>Hiring a new IT Technician from Zambia Institute of Technology</td></tr>
+          <tr><td>Advantage</td><td>Cheaper, faster, boosts employee morale</td><td>Brings new ideas, wider diversity, specific missing skills</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qa-block">
+    <div class="qa-question">
+      <span class="q-badge">Q6 · 25 Marks</span>
+      <p>Explain the Five (5) elements of a High Performance Work System (HPWS).</p>
+    </div>
+    <div class="qa-answer">
+      <h4>// Answer — Industrial Relations PDF, Pages 38–41</h4>
+      <ul class="answer-list">
+        <li><span class="ans-num">1</span><div class="ans-content"><strong>Organisational Structure:</strong> How the company groups people into divisions and establishes reporting relationships. Flat structures replace tall hierarchies to speed up decisions.<div class="ans-example">Example: A marketing team reports directly to the CEO instead of through 4 layers of management.</div></div></li>
+        <li><span class="ans-num">2</span><div class="ans-content"><strong>Task Design:</strong> How work activities are grouped into jobs or team responsibilities, enabling workers to see the full picture of their contribution.<div class="ans-example">Example: Allowing a team to build and deliver a complete product rather than each member just assembling one component.</div></div></li>
+        <li><span class="ans-num">3</span><div class="ans-content"><strong>People (Selection):</strong> Emphasis on hiring employees who are well-suited to their roles and well-prepared for challenges. Employees may participate in selecting new team members.<div class="ans-example">Example: Team members interview and vote on candidates before final HR approval.</div></div></li>
+        <li><span class="ans-num">4</span><div class="ans-content"><strong>Reward Systems:</strong> Rewards are tied to company financial performance (pay-for-performance model). Individual and team bonuses linked to measurable outcomes.<div class="ans-example">Example: Bonuses awarded when a team meets quarterly safety or productivity goals.</div></div></li>
+        <li><span class="ans-num">5</span><div class="ans-content"><strong>Information Systems:</strong> Modern IT allows wide, real-time sharing of information across the entire organisation, reducing information silos.<div class="ans-example">Example: All employees can see live customer satisfaction scores on a shared dashboard.</div></div></li>
+      </ul>
+      <div style="margin-top:14px; background:var(--slate); color:#fff; padding:12px 16px; font-size:13px; border-radius:2px;">
+        <strong style="color:var(--gold);">HPWS Outcomes:</strong> High product quality · Low turnover · Job satisfaction · Constant performance feedback loop
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qa-block" style="margin-bottom:60px;">
+    <div class="qa-question">
+      <span class="q-badge">Q7 · 5 Marks</span>
+      <p>Briefly explain any five (5) causes of an industrial dispute.</p>
+    </div>
+    <div class="qa-answer">
+      <h4>// Answer — Industrial Relations PDF, Pages 17–18</h4>
+      <ul class="answer-list">
+        <li><span class="ans-num">1</span><div class="ans-content"><strong>Industrial Factors:</strong> Disputes over wages, working hours, and employment terms — the most common root cause of industrial action.</div></li>
+        <li><span class="ans-num">2</span><div class="ans-content"><strong>Management Attitude:</strong> Management's unwillingness to recognise a trade union or engage in meaningful dispute resolution creates adversarial relationships.</div></li>
+        <li><span class="ans-num">3</span><div class="ans-content"><strong>Communication Breakdowns:</strong> Misunderstandings between managers and workers due to poor, infrequent, or one-directional information flow.</div></li>
+        <li><span class="ans-num">4</span><div class="ans-content"><strong>Unreasonable Standards:</strong> Unfair rules, arbitrary policies, or burdensome procedures that frustrate employees and erode trust in management.</div></li>
+        <li><span class="ans-num">5</span><div class="ans-content"><strong>Unrealised Expectations:</strong> Dissatisfaction accumulates when what employees were promised or expected (promotion, pay rise, benefits) does not materialise.</div></li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end .container -->
+
+<div class="footer">
+  <div class="container">
+    HRM · L99 · OODA Study Guide &nbsp;|&nbsp; <span>Observe · Orient · Decide · Act</span> &nbsp;|&nbsp; Good luck on your exam.
+  </div>
+</div>
+
+</body>
+</html>
